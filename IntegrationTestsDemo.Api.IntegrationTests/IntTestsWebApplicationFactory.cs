@@ -32,7 +32,10 @@ public class IntTestsWebApplicationFactory : WebApplicationFactory<Program>, IAs
     public async Task InitializeAsync()
     {
         _database = await TestDatabaseFactory.CreateAsync();
-        HttpClient = CreateClient();
+        HttpClient = CreateClient(new WebApplicationFactoryClientOptions
+        {
+            AllowAutoRedirect = false
+        });
     }
 
     async Task IAsyncLifetime.DisposeAsync()
